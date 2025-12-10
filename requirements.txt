@@ -1,0 +1,17 @@
+# Mela SIM Sell Portal - Python Dependencies
+
+# Flask Framework
+Flask==3.0.0
+flask-cors==4.0.0
+
+# Oracle Database Driver (same as Call Drop Report Portal)
+oracledb
+
+# Excel file handling
+openpyxl
+
+# Utilities
+python-dotenv==1.0.0
+
+# WSGI Server for Production
+gunicorn==21.2.0

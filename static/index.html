@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Teletalk - Mela SIM sell (CRM channel)</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="header-content">
+                <div class="logo-wrapper">
+                    <img src="/static/teletalk-logo.png" alt="Teletalk Logo" class="logo">
+                    <div class="logo-glow"></div>
+                </div>
+                <div class="header-text">
+                    <h1>Mela SIM sell (CRM channel)</h1>
+                    <p class="subtitle">Teletalk Bangladesh Limited</p>
+                </div>
+            </div>
+        </header>
+
+        <div class="form-container">
+            <!-- Bulk Upload Section -->
+            <div class="bulk-upload-section">
+                <h3>Bulk Upload</h3>
+                <div class="bulk-upload-controls">
+                    <button type="button" id="downloadTemplateBtn" class="btn-download">
+                        Download Excel Template
+                    </button>
+                    <button type="button" id="downloadExcelBtn" class="btn-download">
+                        Download Records
+                    </button>
+                    <div class="upload-wrapper">
+                        <input type="file" id="bulkUploadFile" accept=".xlsx,.xls" style="display: none;">
+                        <button type="button" id="uploadBtn" class="btn-upload">
+                            Upload Excel File
+                        </button>
+                        <span id="fileName" class="file-name"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="divider">
+                <span>OR Enter Manually</span>
+            </div>
+
+            <form id="simSellForm">
+                <!-- Zone Dropdown -->
+                <div class="form-group">
+                    <label for="zone">Zone <span class="required">*</span></label>
+                    <div class="custom-select">
+                        <input type="text" 
+                               id="zoneSearch" 
+                               placeholder="Search zone..." 
+                               class="search-input"
+                               autocomplete="off">
+                        <div id="zoneDropdown" class="dropdown-content"></div>
+                    </div>
+                </div>
+
+                <!-- Field Officer Dropdown with Search -->
+                <div class="form-group">
+                    <label for="field_officer">Field Officer <span class="required">*</span></label>
+                    <div class="custom-select">
+                        <input type="text" 
+                               id="officerSearch" 
+                               placeholder="Search field officer..." 
+                               class="search-input"
+                               autocomplete="off">
+                        <div id="officerDropdown" class="dropdown-content"></div>
+                    </div>
+                </div>
+
+                <!-- BTSID Input -->
+                <div class="form-group">
+                    <label for="btsid">BTS ID <span class="required">*</span></label>
+                    <input type="text" 
+                           id="btsid" 
+                           name="btsid" 
+                           placeholder="Enter BTS ID" 
+                           required>
+                </div>
+
+                <!-- MSISDN Input (10 digits) -->
+                <div class="form-group">
+                    <label for="msisdn">MSISDN <span class="required">*</span></label>
+                    <input type="text" 
+                           id="msisdn" 
+                           name="msisdn" 
+                           placeholder="Enter MSISDN (e.g., 1534567890)" 
+                           pattern="15[0-9]{8}" 
+                           maxlength="10"
+                           required>
+                    <small id="msisdnHelp">Must be 10 digits starting with 15</small>
+                    <div id="msisdnWarning" class="msisdn-warning" style="display: none;"></div>
+                </div>
+
+                <!-- Date Input -->
+                <div class="form-group">
+                    <label for="entry_date">Date <span class="required">*</span></label>
+                    <input type="date" 
+                           id="entry_date" 
+                           name="entry_date" 
+                           required>
+                    <small>Format: YYYY-MM-DD</small>
+                </div>
+
+                <!-- New SIM Dropdown -->
+                <div class="form-group">
+                    <label for="new_sim">New SIM <span class="required">*</span></label>
+                    <select id="new_sim" name="new_sim" required>
+                        <option value="">-- Select Option --</option>
+                        <option value="YES">YES</option>
+                        <option value="NO">NO</option>
+                    </select>
+                </div>
+
+                <!-- Replace Dropdown -->
+                <div class="form-group">
+                    <label for="replace">Replace <span class="required">*</span></label>
+                    <select id="replace" name="replace" required>
+                        <option value="">-- Select Option --</option>
+                        <option value="YES">YES</option>
+                        <option value="NO">NO</option>
+                    </select>
+                </div>
+
+                <!-- Number of New Retailer Creation -->
+                <div class="form-group">
+                    <label for="new_retailer_count">Number of New Retailer Creation <span class="required">*</span></label>
+                    <select id="new_retailer_count" name="new_retailer_count" required>
+                        <option value="">-- Select Number --</option>
+                    </select>
+                </div>
+
+                <!-- Submit Button -->
+                <div class="form-group">
+                    <button type="submit" class="btn-submit">Submit</button>
+                    <button type="reset" class="btn-reset">Reset</button>
+                </div>
+            </form>
+
+            <!-- Message Display -->
+            <div id="message" class="message"></div>
+        </div>
+
+        <!-- Recent Records Section -->
+        <div class="records-container">
+            <div class="records-header">
+                <h2>Recent Submissions</h2>
+                <button id="refreshBtn" class="btn-refresh">Refresh</button>
+            </div>
+            <div class="table-container">
+                <table id="recordsTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Zone</th>
+                            <th>Field Officer</th>
+                            <th>BTS ID</th>
+                            <th>MSISDN</th>
+                            <th>Date (YYYY-MM-DD)</th>
+                            <th>New SIM</th>
+                            <th>Replace</th>
+                            <th>New Retailers</th>
+                            <th>Created Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="recordsBody">
+                        <tr>
+                            <td colspan="10" class="loading">Loading records...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/script.js"></script>
+</body>
+</html>

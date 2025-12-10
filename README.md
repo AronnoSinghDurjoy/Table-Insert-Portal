@@ -1,15 +1,40 @@
-# Mela SIM Sell Portal
+# Mela SIM Sell Portal (CRM Channel)
 
-A web-based portal for Teletalk's Mela SIM sell data entry and management system. Built with Flask (Python) backend and vanilla JavaScript frontend, connected to Oracle 19c database.
+![Mela SIM Sell Portal](TableInsert.png)
 
-## Features
+A comprehensive web-based data entry and management portal for Teletalk Bangladesh's Mela SIM sell operations through CRM channels. Features real-time validation, bulk Excel upload, searchable dropdowns, and seamless Oracle database integration.
 
-- ✅ **Searchable Dropdowns**: Zone and Field Officer dropdowns with real-time search functionality
-- ✅ **Data Validation**: 10-digit MSISDN validation, retailer count limits (0-99)
-- ✅ **Oracle Integration**: Direct connection to dwhdb02 using cx_Oracle
-- ✅ **Real-time Records**: View recent submissions instantly
-- ✅ **Responsive Design**: Works on desktop, tablet, and mobile devices
-- ✅ **RESTful API**: Clean API endpoints for all operations
+## 🎯 Project Overview
+
+The Mela SIM Sell Portal streamlines the process of recording and managing SIM card sales data for Teletalk Bangladesh. Built with Flask backend and vanilla JavaScript frontend, it provides both manual entry and bulk upload capabilities with extensive validation and error handling.
+
+## ✨ Key Features
+
+### Data Entry & Validation
+- ✅ **Searchable Dropdowns**: Zone and Field Officer selection with real-time search functionality
+- ✅ **Smart Validation**: 10-digit MSISDN starting with "15", date format validation (YYYY-MM-DD)
+- ✅ **Duplicate Detection**: Real-time MSISDN duplicate checking before submission
+- ✅ **Mutual Exclusion**: Automatic toggle between New SIM and Replace options
+- ✅ **Date Entry**: Flexible date input with support for multiple formats
+
+### Bulk Operations
+- ✅ **Excel Template Download**: Pre-formatted template with proper column headers
+- ✅ **Bulk Upload**: Upload multiple records via Excel file (.xlsx, .xls)
+- ✅ **Auto Format Conversion**: Supports multiple date formats (YYYY-MM-DD, DD/MM/YYYY, etc.)
+- ✅ **Error Reporting**: Detailed error messages with row numbers for failed uploads
+- ✅ **Success Popup**: Beautiful notification showing upload results
+
+### Data Management
+- ✅ **Recent Submissions**: View latest 5 records in real-time
+- ✅ **Excel Export**: Download all records as Excel file with timestamp
+- ✅ **Oracle Integration**: Direct connection to Oracle 19c database (dwhdb02)
+- ✅ **RESTful API**: Clean, documented API endpoints
+
+### User Experience
+- ✅ **Responsive Design**: Works perfectly on desktop, tablet, and mobile
+- ✅ **Green Theme**: Professional Teletalk-branded color scheme
+- ✅ **Real-time Feedback**: Instant validation messages and warnings
+- ✅ **Auto-refresh**: Records table updates after submissions
 
 ## Project Structure
 
